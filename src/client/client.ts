@@ -8,7 +8,7 @@ import { Color, Vector2, Vector3 } from 'three'
 import {EffectComposer} from 'three/examples/jsm/postprocessing/EffectComposer'
 import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 import {OutlinePass} from 'three/examples/jsm/postprocessing/OutlinePass'
-import { doStuff, AnimateBackGround } from '../src/Utils'
+import { doStuff, AnimateBackGround } from './Utils'
 
 const scene = new THREE.Scene()
 scene.background = new THREE.Color(0x456990)
@@ -187,10 +187,10 @@ function render() {
                 //scene.add(otherObject);
             }
 
-            var currentRotation = mainObject.rotation;
-            currentRotation.x = currentRotation.x + rotationDirection.x * 0.01;
-            currentRotation.y = currentRotation.y + rotationDirection.y * 0.01;
-            currentRotation.z = currentRotation.z + rotationDirection.z * 0.01;
+            //var currentRotation = mainObject.rotation;
+            //currentRotation.x = currentRotation.x + rotationDirection.x * 0.01;
+            //currentRotation.y = currentRotation.y + rotationDirection.y * 0.01;
+            //currentRotation.z = currentRotation.z + rotationDirection.z * 0.01;
         }
         renderer.render(scene, camera)
     }

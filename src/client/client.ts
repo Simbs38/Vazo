@@ -114,7 +114,7 @@ var rotationDirection =new Vector3(Math.random(), Math.random(), Math.random()).
 
 const objLoader = new OBJLoader()
 objLoader.load(
-    'models/vaso.obj',
+    'models/vazoSimplified.obj',
     (object) => {
         mainObject = object
         object.scale.set(3, 3, 3);

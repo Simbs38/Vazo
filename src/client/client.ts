@@ -36,7 +36,7 @@ const camera = new THREE.PerspectiveCamera(
 )
 camera.position.set(20,0, 345)
 
-
+/*
 const gui = new GUI()
 const cameraRotation = gui.addFolder('Rotation')
 cameraRotation.add(camera.rotation, 'x', 0, Math.PI * 2)
@@ -51,7 +51,7 @@ cameraPosition.add(camera.position, 'z', -400, 400)
 cameraPosition.open()
 
 gui.close()
-
+*/
 
 
 const renderer = new THREE.WebGLRenderer()
@@ -110,7 +110,7 @@ function animateParticles(event : MouseEvent){
 }
 
 var mainObject = new THREE.Group()
-var rotationDirection =new Vector3(Math.random(), Math.random(), Math.random()).normalize()
+//var rotationDirection =new Vector3(Math.random(), Math.random(), Math.random()).normalize()
 
 const objLoader = new OBJLoader()
 objLoader.load(

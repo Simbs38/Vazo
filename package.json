@@ -2,6 +2,7 @@
   "name": "bthreejstutorial",
   "version": "1.0.0",
   "private": true,
+  "author": "",
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
@@ -10,10 +11,10 @@
   "dependencies": {
     "core-js": "^3.6.5",
     "dat.gui": "^0.7.7",
-    "vue": "^3.0.0"
+    "vue": "^3.0.0",
+    "vue-router": "^4.0.0-0",
+    "webpack": "^4.46.0"
   },
-  "author": "",
-  "license": "ISC",
   "devDependencies": {
     "@types/dat.gui": "^0.7.7",
     "@types/three": "^0.131.0",
@@ -21,6 +22,7 @@
     "@typescript-eslint/parser": "^4.18.0",
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-eslint": "~4.5.0",
+    "@vue/cli-plugin-router": "~4.5.0",
     "@vue/cli-plugin-typescript": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
     "@vue/compiler-sfc": "^3.0.0",
@@ -34,5 +36,6 @@
     "eslint-plugin-vue": "^7.0.0",
     "three": "^0.131.3",
     "typescript": "^4.3.5"
-  }
+  },
+  "license": "ISC"
 }

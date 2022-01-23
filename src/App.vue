@@ -1,15 +1,16 @@
 <template>
-  <HelloWorld/>
+  <navbar/>
+  <router-view/>
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import HelloWorld from './components/HelloWorld.vue'
+import navbar from './components/navbar.vue'
 
 export default defineComponent({
-  name: 'App',
+  name: 'Base',
   components: {
-    HelloWorld
+    navbar
   }
 })
 </script>
@@ -21,6 +22,18 @@ export default defineComponent({
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
-  margin-top: 60px;
+}
+
+#nav {
+  padding: 30px;
+}
+
+#nav a {
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+#nav a.router-link-exact-active {
+  color: #42b983;
 }
 </style>

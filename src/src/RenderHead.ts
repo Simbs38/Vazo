@@ -1,47 +1,48 @@
+import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import * as THREE from 'three'
 
 export class RenderHead {
   public scene : THREE.Scene;
   public renderer : THREE.WebGLRenderer;
-  public camera : THREE.PerspectiveCamera;
-  private static instance : RenderHead;
+  public controls : OrbitControls;
 
-  public static getInstance (): RenderHead {
-    if (RenderHead.instance == null) {
-      RenderHead.instance = new RenderHead()
-    }
-
-    return RenderHead.instance
-  }
-
-  constructor () {
+  public constructor (camera : THREE.Camera) {
     this.scene = new THREE.Scene()
-    this.scene.background = new THREE.Color(0x456990)
-
-    const light = new THREE.PointLight()
-    light.position.set(20, 20, 250)
-    this.scene.add(light)
-
-    this.camera = new THREE.PerspectiveCamera(
-      75,
-      window.innerWidth / window.innerHeight,
-      10,
-      800
-    )
-    this.camera.position.set(0, 0, 5)
-
     this.renderer = new THREE.WebGLRenderer()
-    this.renderer.outputEncoding = THREE.sRGBEncoding
     this.renderer.setSize(window.innerWidth, window.innerHeight)
-
-    window.addEventListener('resize', this.onWindowResize, false)
+    this.controls = new OrbitControls(camera, this.renderer.domElement)
+    this.controls.enablePan = false
   }
 
-  CreateCube (): THREE.Mesh {
+  public AddMeshToScene (mesh : THREE.Mesh): void {
+    this.scene.add(mesh)
+  }
+
+  public AddLigth (x : number, y : number, z : number, color : THREE.ColorRepresentation): THREE.Light {
+    // const tmp = new THREE.PointLight(color)
+    // this.scene.add(tmp)
+    // tmp.position.set(x, y, z)
+
+    // const tmp2 = new THREE.PointLightHelper(tmp, 1, new THREE.Color(color))
+    // this.scene.add(tmp2)
+    const hemiLigth = new THREE.HemisphereLight(0xe6f7ec, 0x111024, 2)
+    this.scene.add(hemiLigth)
+
+    const spotLigth = new THREE.SpotLight(0xffa95c, 4)
+    spotLigth.castShadow = true
+    spotLigth.shadow.bias = -0.00001
+    spotLigth.shadow.mapSize.height = 1024 * 4
+    spotLigth.shadow.mapSize.width = 1024 * 4
+    this.scene.add(spotLigth)
+
+    return spotLigth
+  }
+
+  public CreateCube (): THREE.Mesh {
     const geometry = new THREE.BoxGeometry()
-    const material = new THREE.MeshToonMaterial({
+    const material = new THREE.MeshBasicMaterial({
       color: 0x00ff00,
-      wireframe: true
+      wireframe: false
     })
     const cube = new THREE.Mesh(geometry, material)
     this.scene.add(cube)
@@ -51,22 +52,5 @@ export class RenderHead {
 
   getDomElement (): HTMLCanvasElement {
     return this.renderer.domElement
-  }
-
-  startRendering (): void{
-    RenderHead.render()
-  }
-
-  private static render (): void{
-    const head = RenderHead.getInstance()
-    head.renderer.render(head.scene, head.camera)
-    requestAnimationFrame(RenderHead.render)
-  }
-
-  private onWindowResize (): void {
-    this.camera.aspect = window.innerWidth / window.innerHeight
-    this.camera.updateProjectionMatrix()
-    this.renderer.setSize(window.innerWidth, window.innerHeight)
-    RenderHead.render()
   }
 }

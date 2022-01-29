@@ -14,22 +14,22 @@ const routes: Array<RouteRecordRaw> = [
   {
     path: '/register',
     name: 'Register',
-    component: () => Register
+    component: Register
   },
   {
     path: '/check',
     name: 'Check',
-    component: () => Check
+    component: Check
   },
   {
     path: '/print',
     name: 'Print',
-    component: () => Print
+    component: Print
   },
   {
     path: '/about',
     name: 'About',
-    component: () => About
+    component: About
   }
 ]
 

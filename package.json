@@ -25,6 +25,7 @@
     "ts-node": "^10.4.0",
     "vue": "^3.0.0",
     "vue-router": "^4.0.0-0",
+    "vue-threejs": "^0.2.0-alpha.1",
     "webpack": "^4.46.0"
   },
   "devDependencies": {

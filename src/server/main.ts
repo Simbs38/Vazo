@@ -7,7 +7,12 @@ dotenv.config()
 
 const app = express()
 
+const options : cors.CorsOptions = {
+  origin: ['http://localhost:8080']
+}
+
 app.set('port', process.env.PORT || 3000)
+app.use(cors(options))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.get('/api/form', (req, res) => {

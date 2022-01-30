@@ -1,11 +1,9 @@
 <template>
-    <div class="topnav">
-        <a class="active" href="/">Home</a>
-        <a href="/Register"> Register </a>
-        <a href="/Check"> Check </a>
-        <a href="/Print"> Print </a>
-        <a href="/About">About </a>
-    </div>
+    <div id="menu" class="topnav">
+      <router-link v-for="route in routeList" :key="route.path" :to="route.path">
+        {{route.name}}
+      </router-link>
+  </div>
 </template>
 
 <script>
@@ -13,7 +11,15 @@
 import { defineComponent } from 'vue'
 
 export default defineComponent({
-  name: 'navbar'
+  name: 'navbar',
+  data: () => {
+    return {
+      routeList: []
+    }
+  },
+  created () {
+    this.routeList = this.$router.getRoutes()
+  }
 })
 </script>
 
@@ -21,9 +27,9 @@ export default defineComponent({
 .topnav{
   background-color: transparent;
   overflow: hidden;
-  position: absolute;
   padding-left: 10px;
   padding-top: 5px;
+  margin-bottom: 3rem;
 }
 
 .topnav a {
@@ -42,7 +48,7 @@ export default defineComponent({
   background-color: rgba(26, 26, 26, 0.125);
 }
 
-.topnav a.active {
+.topnav a.router-link-active {
   background-color: rgba(26, 26, 26, 0.25);
 }
 </style>

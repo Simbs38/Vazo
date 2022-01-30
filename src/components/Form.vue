@@ -19,6 +19,7 @@
                 <label for="text" class="form-label">Text</label>
                 <textarea name="text" class="form-control" id="text" rows="3"></textarea>
             </div>
+            <button @click="submit()" type="button" class="btn btn-success">Submit</button>
         </form>
     </div>
 </template>
@@ -62,6 +63,12 @@ export default defineComponent({
       } else {
         this.isCityVisible = false
       }
+    },
+    async submit () {
+      const response = await fetch('http://localhost:3000/api/form', {
+        mode: 'cors'
+      })
+      console.log(response)
     }
   }
 })

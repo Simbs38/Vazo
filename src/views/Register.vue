@@ -1,21 +1,18 @@
 <template>
-  <navbar />
-  <Form />
+    <Form />
 </template>
 
 <script lang="ts">
 import { defineComponent } from 'vue'
 import Form from '../components/Form.vue'
-import navbar from '../components/navbar.vue'
 
 export default defineComponent({
-  name: 'Register',
-  components: {
-    Form, navbar
-  }
+    name: 'Register',
+    components: {
+        Form
+    }
 })
+
 </script>
-
-<style scoped>
-
+    <style scoped>
 </style>

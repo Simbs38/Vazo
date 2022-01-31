@@ -36,6 +36,8 @@ router.post('/form', (req, res) => {
       logger.error(`${error.name} - ${error.message}`)
       res.status(500).send('Error saving regist')
     })
+
+  res.status(200).send('Created register')
 })
 
 /**
@@ -56,9 +58,9 @@ router.get('/all', (req, res) => {
  * Route responsible for getting regists according to a filter
  * TODO: Define how the filters will be
  */
-router.get('/filter', (req, res) => {
+router.get('/filter/:vaseId', (req, res) => {
   // TODO: Must add filters
-  Regist.find({}, (error, found) => {
+  Regist.find({ vaseId: req.params.vaseId }, (error, found) => {
     if (!error) {
       res.json(found)
       return

@@ -23,7 +23,7 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use('/api', apiRouter)
 
 // Configure mongo connection
-mongoose.connect('mongodb+srv://test:root@cluster0.ocuei.mongodb.net/Vaso?retryWrites=true&w=majority')
+mongoose.connect(`${process.env.MONGODB_URL}`)
 
 app.listen(app.get('port'), () => {
   logger.info(

@@ -55,12 +55,38 @@ router.get('/all', (req, res) => {
 })
 
 /**
- * Route responsible for getting regists according to a filter
- * TODO: Define how the filters will be
+ * Route responsible for getting regists by vaseId
  */
-router.get('/filter/:vaseId', (req, res) => {
-  // TODO: Must add filters
+router.get('/filter/vaseId/:vaseId', (req, res) => {
   Regist.find({ vaseId: req.params.vaseId }, (error, found) => {
+    if (!error) {
+      res.json(found)
+      return
+    }
+    logger.error(error)
+    res.status(500).send('An error occured')
+  })
+})
+
+/**
+ * Route responsible for getting regists by city
+ */
+router.get('/filter/city/:city', (req, res) => {
+  Regist.find({ city: req.params.city }, (error, found) => {
+    if (!error) {
+      res.json(found)
+      return
+    }
+    logger.error(error)
+    res.status(500).send('An error occured')
+  })
+})
+
+/**
+ * Route responsible for getting regists by country
+ */
+router.get('/filter/country/:country', (req, res) => {
+  Regist.find({ city: req.params.country }, (error, found) => {
     if (!error) {
       res.json(found)
       return

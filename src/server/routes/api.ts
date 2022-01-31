@@ -7,14 +7,19 @@ const router = express.Router()
 
 router.get('/', (req, res) => {
   logger.info('Hey')
-  
   res.send('Test')
 })
 
+/**
+ * Save a new regist to the DB
+ */
 router.post('/form', (req, res) => {
-  console.log(req.body)
+  // Example logger to view things. If parameter is a json object must convert to string
+  logger.silly('Body ' + JSON.stringify(req.body))
 
+  // TODO: must confirm required
   // if (!req.body.vaseId) {
+  //   logger.warn('Received request without vaseId')
   //   res.status(400).send({ error: 'Missing vaseId' })
   // }
 
@@ -33,7 +38,26 @@ router.post('/form', (req, res) => {
     })
 })
 
+/**
+ * Route responsible for getting all the regists in the DB
+ */
 router.get('/all', (req, res) => {
+  Regist.find({}, (error, found) => {
+    if (!error) {
+      res.json(found)
+      return
+    }
+    logger.error(error)
+    res.status(500).send('An error occured')
+  })
+})
+
+/**
+ * Route responsible for getting regists according to a filter
+ * TODO: Define how the filters will be
+ */
+router.get('/filter', (req, res) => {
+  // TODO: Must add filters
   Regist.find({}, (error, found) => {
     if (!error) {
       res.json(found)

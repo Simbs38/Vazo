@@ -18,8 +18,6 @@ head.renderer.shadowMap.enabled = true
 
 const composer = new EffectComposer(head.renderer)
 composer.addPass(new RenderPass(head.scene, camera))
-// composer.addPass(new UnrealBloomPass(new THREE.Vector2(1024, 1024), 2, 0, 0.9))
-// composer.addPass(new FilmPass())
 
 const ligth = head.AddLigth(3, 10, 3, 0xffffff)
 document.body.appendChild(head.getDomElement())
@@ -35,9 +33,11 @@ export function startHeader ():void {
     Obj2Mesh.ChangeToToon(args.children[0] as THREE.Mesh, 0xffffff)
     Obj2Mesh.ChangeColor(args.children[1] as THREE.Mesh, 0x17DE63)
 
-    const outlines = [args.children[0], args.children[1]]
-    const outlinePass = new OutlinePass(new THREE.Vector2(1024, 1024), head.scene, camera, outlines)
-    outlinePass.visibleEdgeColor.set(0x000000)
+    const outlinePass = new OutlinePass(new THREE.Vector2(1024, 1024), head.scene, camera, [args.children[0], args.children[1]])
+    outlinePass.visibleEdgeColor.set(0xffffff)
+    outlinePass.edgeThickness = 2
+    outlinePass.edgeStrength = 10
+    outlinePass.overlayMaterial.blending = THREE.SubtractiveBlending
     composer.addPass(outlinePass)
 
     head.scene.add(args)

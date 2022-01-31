@@ -5,7 +5,7 @@ import { Error } from 'mongoose'
 
 const router = express.Router()
 
-router.get('/', (req, res) => {
+router.get('/', (_, res) => {
   logger.info('Hey')
   res.send('Test')
 })
@@ -43,7 +43,7 @@ router.post('/form', (req, res) => {
 /**
  * Route responsible for getting all the regists in the DB
  */
-router.get('/all', (req, res) => {
+router.get('/all', (_, res) => {
   Regist.find({}, (error, found) => {
     if (!error) {
       res.json(found)
@@ -55,38 +55,25 @@ router.get('/all', (req, res) => {
 })
 
 /**
- * Route responsible for getting regists by vaseId
+ * Route responsible for getting regists by a given filter
+ * If wrong filtertype is given an error is returned
  */
-router.get('/filter/vaseId/:vaseId', (req, res) => {
-  Regist.find({ vaseId: req.params.vaseId }, (error, found) => {
-    if (!error) {
-      res.json(found)
-      return
-    }
-    logger.error(error)
-    res.status(500).send('An error occured')
-  })
-})
+router.get('/filter/:filterType/:filterValue', (req, res) => {
+  // Get schema properties
+  const RegistProperties = Regist.schema.paths
 
-/**
- * Route responsible for getting regists by city
- */
-router.get('/filter/city/:city', (req, res) => {
-  Regist.find({ city: req.params.city }, (error, found) => {
-    if (!error) {
-      res.json(found)
-      return
-    }
-    logger.error(error)
-    res.status(500).send('An error occured')
-  })
-})
+  // Confirm that filtertype is a property of Regist
+  if (!(req.params.filterType in RegistProperties)) {
+    logger.warn('Wrong filtertype \'' + req.params.filterType + '\'')
+    res.status(400).send('Wrong filtertype')
+    return
+  }
+  // TODO: must confirm type
+  const queryParam : Record<string, unknown> = {}
+  queryParam[req.params.filterType] = req.params.filterValue
 
-/**
- * Route responsible for getting regists by country
- */
-router.get('/filter/country/:country', (req, res) => {
-  Regist.find({ city: req.params.country }, (error, found) => {
+  // Search for the given filters
+  Regist.find(queryParam, (error, found) => {
     if (!error) {
       res.json(found)
       return

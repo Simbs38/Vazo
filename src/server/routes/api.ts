@@ -25,7 +25,7 @@ router.post('/form', (req, res) => {
 
   const regist = new Regist({
     vaseId: req.body.vaseId,
-    country: req.body.coutry,
+    country: req.body.country,
     city: req.body.city,
     text: req.body.text
   })

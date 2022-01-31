@@ -14,9 +14,6 @@ router.get('/', (_, res) => {
  * Save a new regist to the DB
  */
 router.post('/form', (req, res) => {
-  // Example logger to view things. If parameter is a json object must convert to string
-  logger.silly('Body ' + JSON.stringify(req.body))
-
   // TODO: must confirm required
   // if (!req.body.vaseId) {
   //   logger.warn('Received request without vaseId')

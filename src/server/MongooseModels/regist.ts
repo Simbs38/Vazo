@@ -1,4 +1,3 @@
-
 import mongoose from 'mongoose'
 
 const RegistSchema = new mongoose.Schema({
@@ -15,7 +14,9 @@ const RegistSchema = new mongoose.Schema({
   text: {
     type: String
   }
-}, { timestamps: true })
+}, {
+  timestamps: { createdAt: true, updatedAt: false }
+})
 
 const Regist = mongoose.model('Regist', RegistSchema)
 

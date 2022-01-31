@@ -13,7 +13,7 @@ head.scene.background = new THREE.Color(0x456990)
 export function startHeader ():void {
   const tmpElement = document.getElementById('headCanvas') as HTMLElement
   tmpElement.appendChild(head.renderer.domElement)
-  const path = 'https://raw.githubusercontent.com/Simbs38/Vazo/master/src/assets/models/vazoSimplified.obj'
+  const path = 'https://raw.githubusercontent.com/Simbs38/Vazo/master/src/public/static/vaso.obj'
   const promiss = Obj2Mesh.CreateMesh(path, new THREE.Vector3(0, -1, 0), new THREE.Vector3(0.05, 0.05, 0.05))
 
   promiss.then(args => {

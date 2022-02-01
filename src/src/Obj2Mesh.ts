@@ -3,13 +3,11 @@ import * as THREE from 'three'
 
 export class Obj2Mesh {
     public static async CreateMesh (path: string, position: THREE.Vector3, scale : THREE.Vector3) : Promise<THREE.Group> {
-        return Promise.resolve().then(async _ => {
-            const ans = await new OBJLoader().loadAsync(path)
-            ans.scale.set(scale.x, scale.y, scale.z)
-            ans.position.set(position.x, position.y, position.z)
+        const ans = await new OBJLoader().loadAsync(path)
+        ans.scale.set(scale.x, scale.y, scale.z)
+        ans.position.set(position.x, position.y, position.z)
 
-            return ans
-        })
+        return ans
     }
 
     public static ChangeToNormals (mesh : THREE.Mesh): void {

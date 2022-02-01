@@ -29,48 +29,48 @@ import { defineComponent } from 'vue'
 import { CountryApi, Country } from '../Models/CountryModels'
 
 export default defineComponent({
-  name: 'Form',
-  data: () => {
-    return {
-      countryList: Array<Country>(),
-      cityList: Array<string>(),
-      selectedCountry: '',
-      selectedCity: String,
-      isCityVisible: false
-    }
-  },
-  created () {
-    this.loadCountries()
-  },
-  methods: {
-    async loadCountries () {
-      const response = await fetch('https://countriesnow.space/api/v0.1/countries')
-      const json = await response.json()
-      json.data.forEach((countryApi: CountryApi) => {
-        const country = new Country(countryApi.iso2, countryApi.country, countryApi.cities)
-        this.countryList.push(country)
-      })
-    },
-    countryChanged () {
-      const country = this.countryList.filter((country : Country) => {
-        if (country.code === this.selectedCountry) {
-          return true
+    name: 'Form',
+    data: () => {
+        return {
+            countryList: Array<Country>(),
+            cityList: Array<string>(),
+            selectedCountry: '',
+            selectedCity: String,
+            isCityVisible: false
         }
-      })
-      if (country.length > 0) {
-        this.cityList = country[0].cities
-        this.isCityVisible = true
-      } else {
-        this.isCityVisible = false
-      }
     },
-    async submit () {
-      const response = await fetch('http://localhost:3000/api/form', {
-        mode: 'cors'
-      })
-      console.log(response)
+    created () {
+        this.loadCountries()
+    },
+    methods: {
+        async loadCountries () {
+            const response = await fetch('https://countriesnow.space/api/v0.1/countries')
+            const json = await response.json()
+            json.data.forEach((countryApi: CountryApi) => {
+                const country = new Country(countryApi.iso2, countryApi.country, countryApi.cities)
+                this.countryList.push(country)
+            })
+        },
+        countryChanged () {
+            const country = this.countryList.filter((country : Country) => {
+                if (country.code === this.selectedCountry) {
+                    return true
+                }
+            })
+            if (country.length > 0) {
+                this.cityList = country[0].cities
+                this.isCityVisible = true
+            } else {
+                this.isCityVisible = false
+            }
+        },
+        async submit () {
+            const response = await fetch('http://localhost:3000/api/form', {
+                mode: 'cors'
+            })
+            console.log(response)
+        }
     }
-  }
 })
 </script>
 

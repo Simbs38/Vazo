@@ -7,10 +7,10 @@ import { defineComponent } from 'vue'
 import { startHeader } from '../src/header'
 
 export default defineComponent({
-  name: 'Home',
-  mounted () {
-    startHeader()
-  }
+    name: 'Home',
+    mounted () {
+        startHeader()
+    }
 })
 </script>
 

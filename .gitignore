@@ -1,5 +1,6 @@
-node_modules
-package-lock.json
 src/server/log
 dist
+
+node_modules
+package-lock.json
 .env

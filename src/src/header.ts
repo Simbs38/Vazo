@@ -4,6 +4,7 @@ import { Obj2Mesh } from './Obj2Mesh'
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer'
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass'
 import { OutlinePass } from 'three/examples/jsm/postprocessing/OutlinePass'
+import { Text2Mesh } from './Text2Mesh'
 
 const camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000)
 camera.position.set(0, 1.1, 2)
@@ -13,6 +14,14 @@ const head = new RenderHead(camera)
 head.renderer.toneMapping = THREE.ReinhardToneMapping
 head.renderer.toneMappingExposure = 2
 head.renderer.shadowMap.enabled = true
+
+const fontPath = 'https://raw.githubusercontent.com/Simbs38/Vazo/improve/simbsText/src/fonts/Bebas%20Neue_Regular.json'
+
+Text2Mesh.LoadFont(fontPath).then(font => {
+    const textMesh = Text2Mesh.CreateText('Deram te o vaso?', 0.5, 0.1, 10, 1, 1, font)
+    textMesh.position.set(-1.9, 0.5, -4)
+    head.scene.add(textMesh)
+})
 
 const composer = new EffectComposer(head.renderer)
 composer.addPass(new RenderPass(head.scene, camera))

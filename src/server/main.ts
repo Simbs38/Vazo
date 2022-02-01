@@ -2,9 +2,12 @@ import express from 'express'
 import dotenv from 'dotenv'
 import bodyParser from 'body-parser'
 import cors from 'cors'
+import mongoose from 'mongoose'
+
+import { router as apiRouter } from './routes/api'
+import { logger } from './logger'
 
 dotenv.config()
-
 const app = express()
 
 const options : cors.CorsOptions = {
@@ -15,19 +18,18 @@ app.set('port', process.env.PORT || 3000)
 app.use(cors(options))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({ extended: true }))
-app.get('/api/form', (req, res) => {
-  res.json({
-    text: 'Hello World'
-  })
-})
+
+// Configure routers
+app.use('/api', apiRouter)
+
+// Configure mongo connection
+mongoose.connect(`${process.env.MONGODB_URL}`)
 
 app.listen(app.get('port'), () => {
-  console.log(
-    'App is running at http://localhost:%d in %s mode',
-    app.get('port'),
-    app.get('env')
+  logger.info(
+    `App is running at http://localhost:${app.get('port')} in ${app.get('env')} mode`
   )
-  console.log('Press CTRL-C to stop\n')
+  logger.info('Press CTRL-C to stop')
 })
 
 export default app

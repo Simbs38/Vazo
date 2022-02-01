@@ -4,6 +4,7 @@
   "private": true,
   "author": "",
   "scripts": {
+    "start" : "npm run dev:client",
     "serve": "concurrently \"npm run dev:server\" \"npm run dev:client\" --raw",
     "build": "concurrently \"npm run build:server\" \"npm run build:client\"",
     "dev:client": "vue-cli-service serve",

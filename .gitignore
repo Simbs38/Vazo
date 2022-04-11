@@ -1,6 +1,2 @@
-src/server/log
-dist
-
 node_modules
-package-lock.json
-.env
+.DS_Store

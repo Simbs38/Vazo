@@ -1,14 +1,10 @@
-var express = require('express'),
-    path = require('path'),
-    app = express();
+const express = require('express')
+const path = require('path')
+const PORT = process.env.PORT || 5000
 
-app.set('port', (process.env.PORT || 8080));
-
-app.use(express.static('public'));
-
-app.listen(app.get('port'), function(err) {
-  if (err) {
-    console.log(err);
-  } else {
-    console.log('Running on port: ' + app.get('port')); }
-});
+express()
+  .use(express.static(path.join(__dirname, 'public')))
+  .set('views', path.join(__dirname, 'views'))
+  .set('view engine', 'ejs')
+  .get('/', (req, res) => res.render('pages/index'))
+  .listen(PORT, () => console.log(`Listening on ${ PORT }`))

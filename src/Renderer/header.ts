@@ -34,9 +34,6 @@ head.AddLigth(0xffa95c, 0x111024, 0xe6f7ec)
 
 document.body.appendChild(head.getDomElement())
 
-const axisHelper = new THREE.AxesHelper(5)
-head.scene.add(axisHelper)
-
 export function startHeader ():void {
     const tmpElement = document.getElementById('headCanvas') as HTMLElement
     tmpElement.appendChild(head.renderer.domElement)

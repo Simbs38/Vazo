@@ -16,11 +16,11 @@ export class RenderHead {
         this.controls.maxZoom = 3
         this.controls.minZoom = 2
         const color = 0xFFFFFF
-        const near = 100
+        const near = 600
         const far = 1000
         this.scene.fog = new THREE.Fog(color, near, far)
         this.renderer.toneMapping = THREE.ReinhardToneMapping
-        this.renderer.toneMappingExposure = 2
+        this.renderer.toneMappingExposure = 3
         this.renderer.shadowMap.enabled = true
     }
 

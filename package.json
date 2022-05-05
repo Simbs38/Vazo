@@ -4,13 +4,8 @@
     "private": true,
     "author": "",
     "scripts": {
-        "start": "npm run dev:client",
-        "serve": "concurrently \"npm run dev:server\" \"npm run dev:client\" --raw",
-        "build": "npm run build:client",
-        "dev:client": "vue-cli-service serve",
-        "build:client": "vue-cli-service build",
-        "dev:server": "nodemon --config ./nodemon.config.json",
-        "build:server": "rimraf dist/server && tsc -p tsconfig.server.json",
+        "start": "vue-cli-service serve",
+        "build": "vue-cli-service build",
         "lint": "vue-cli-service lint"
     },
     "engines": {

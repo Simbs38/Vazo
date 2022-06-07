@@ -13,14 +13,13 @@ import { defineComponent } from 'vue'
 export default defineComponent({
     name: 'navbar',
     data: () => {
-        return {
-            routeList: []
-        }
+        return { routeList: [] }
     },
     created () {
         this.routeList = this.$router.getRoutes()
     }
 })
+
 </script>
 
 <style>

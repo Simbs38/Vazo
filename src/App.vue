@@ -3,16 +3,16 @@
     <router-view/>
 </template>
 
-<script lang="ts">
-import { defineComponent } from 'vue'
-import navbar from './components/navbar.vue'
+<script>
 
-export default defineComponent({
+import navbar from '@/Components/navbar.vue'
+
+export default {
     name: 'Base',
     components: {
         navbar
     }
-})
+}
 </script>
 
 <style>

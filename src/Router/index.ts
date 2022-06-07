@@ -1,9 +1,9 @@
 import { createRouter, createWebHistory, RouteRecordRaw } from 'vue-router'
-import Home from '../views/Home.vue'
-import Register from '../views/Register.vue'
-import Check from '../views/Check.vue'
-import Print from '../views/Print.vue'
-import About from '../views/About.vue'
+import Home from '../Views/Home.vue'
+import Register from '../Views/Register.vue'
+import Check from '../Views/Check.vue'
+import Print from '../Views/Print.vue'
+import About from '../Views/About.vue'
 
 const routes: Array<RouteRecordRaw> = [
     {

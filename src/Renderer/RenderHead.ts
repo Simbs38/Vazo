@@ -4,17 +4,11 @@ import * as THREE from 'three'
 export class RenderHead {
     public scene : THREE.Scene;
     public renderer : THREE.WebGLRenderer;
-    public controls : OrbitControls;
 
-    public constructor (camera : THREE.Camera) {
+    public constructor () {
         this.scene = new THREE.Scene()
-
         this.renderer = new THREE.WebGLRenderer({ antialias: true })
         this.renderer.setSize(window.innerWidth, window.innerHeight)
-        this.controls = new OrbitControls(camera, this.renderer.domElement)
-        this.controls.enablePan = false
-        this.controls.maxZoom = 3
-        this.controls.minZoom = 2
         const color = 0xFFFFFF
         const near = 600
         const far = 1000
@@ -52,6 +46,10 @@ export class RenderHead {
         this.scene.add(cube)
 
         return cube
+    }
+
+    public UpdateWindowSize () : void {
+        this.renderer.setSize(window.innerWidth, window.innerHeight)
     }
 
     getDomElement (): HTMLCanvasElement {

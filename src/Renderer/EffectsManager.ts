@@ -1,19 +1,23 @@
-import { Object3D } from 'three'
+import { Object3D, WebGLRenderer } from 'three'
 import * as THREE from 'three'
 import { OutlinePass } from 'three/examples/jsm/postprocessing/OutlinePass'
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer'
+import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass'
 
 export class EffectsManager {
     private scene : THREE.Scene
     private camera : THREE.Camera
     private models : Object3D[]
     private currentPass : OutlinePass
+    public composer : EffectComposer
 
-    public constructor (scene : THREE.Scene, camera : THREE.Camera) {
+    public constructor (scene : THREE.Scene, renderer : WebGLRenderer, camera : THREE.Camera) {
         this.scene = scene
         this.camera = camera
         this.models = new Array<Object3D>()
         this.currentPass = new OutlinePass(new THREE.Vector2(1, 1), scene, camera, this.models)
+        this.composer = new EffectComposer(renderer)
+        this.composer.addPass(new RenderPass(scene, camera))
     }
 
     public SetModels (models : Object3D[]) : void {
@@ -26,6 +30,10 @@ export class EffectsManager {
 
         this.currentPass = this.DrawPass(width, height)
         composer.addPass(this.currentPass)
+    }
+
+    public UpdateWindowSize () : void {
+        this.UpdatePass(window.innerWidth, window.innerHeight, this.composer)
     }
 
     private DrawPass (width : number, height : number) : OutlinePass {

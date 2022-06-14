@@ -9,7 +9,7 @@ export class TextManager {
     private fontLoaded : boolean
 
     public constructor () {
-        this.fontPath = 'https://raw.githubusercontent.com/Simbs38/Vazo/master/src/fonts/Bebas%20Neue_Regular.json'
+        this.fontPath = 'https://raw.githubusercontent.com/Simbs38/Vazo/master/fonts/Bebas%20Neue_Regular.json'
         const fontPromise = new FontLoader().loadAsync(this.fontPath)
         this.font = new THREE.Font('')
         this.fontLoaded = false

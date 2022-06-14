@@ -37,10 +37,10 @@ document.body.appendChild(head.getDomElement())
 export function startHeader ():void {
     const tmpElement = document.getElementById('headCanvas') as HTMLElement
     tmpElement.appendChild(head.renderer.domElement)
-    const path = 'https://raw.githubusercontent.com/Simbs38/Vazo/master/src/public/static/vaso.obj'
+    const path = 'https://raw.githubusercontent.com/Simbs38/Vazo/master/public/static/vaso.obj'
     const promiss = Obj2Mesh.CreateMesh(path, new THREE.Vector3(0, -1, 0), new THREE.Vector3(0.05, 0.05, 0.05))
 
-    const texturePath = 'https://raw.githubusercontent.com/Simbs38/Vazo/improve/simbsFrontPage/public/static/skyboxTexture.png'
+    const texturePath = 'https://raw.githubusercontent.com/Simbs38/Vazo/master/public/static/skyboxTexture.png'
     Obj2Mesh.GetTextureMaterial(texturePath).then(result => {
         const skybox = Skybox.Create(result)
         head.scene.add(skybox)

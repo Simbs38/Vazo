@@ -52,12 +52,12 @@ export function startHeader ():void {
         universeManager = new VaseUniverse(args, 10)
 
         universeManager.Models.forEach(vase => {
-            outlineObjects.push(vase)
-            head.scene.add(vase)
+            // outlineObjects.push(vase)
+            // head.scene.add(vase)
         })
 
         universeManager.PathsObjects.forEach(line => {
-            head.scene.add(line)
+            // head.scene.add(line)
         })
 
         outlineObjects.push(args.children[0])

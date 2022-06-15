@@ -49,6 +49,10 @@ window.addEventListener('resize', head.UpdateWindowSize, false)
 window.addEventListener('resize', effectManager.UpdateWindowSize, false)
 window.addEventListener('resize', render, false)
 
+window.addEventListener('mousemove', (event) => {
+    head.onMouseMove(event)
+})
+
 function render () {
     requestAnimationFrame(render)
     effectManager.composer.render()

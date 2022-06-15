@@ -1,4 +1,3 @@
-import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls'
 import * as THREE from 'three'
 
 export class RenderHead {
@@ -16,10 +15,22 @@ export class RenderHead {
         this.renderer.toneMapping = THREE.ReinhardToneMapping
         this.renderer.toneMappingExposure = 3
         this.renderer.shadowMap.enabled = true
+        console.log(this.scene)
     }
 
     public AddMeshToScene (mesh : THREE.Mesh): void {
         this.scene.add(mesh)
+    }
+
+    public onMouseMove (event : MouseEvent) : void {
+        const moveX = event.movementX
+        const moveY = event.movementY
+
+        if (this.scene != null) {
+            console.log(moveX, moveY)
+            this.scene.position.x -= moveX / 1000
+            this.scene.position.y += moveY / 1000
+        }
     }
 
     public AddLigth (color : THREE.ColorRepresentation, groundColor : THREE.ColorRepresentation, skyColor : THREE.ColorRepresentation): THREE.Light {

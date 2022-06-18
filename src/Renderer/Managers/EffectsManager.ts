@@ -7,7 +7,7 @@ import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass'
 export class EffectsManager {
     private scene : THREE.Scene
     private camera : THREE.Camera
-    private models : Object3D[]
+    public models : Object3D[]
     private currentPass : OutlinePass
     public composer : EffectComposer
 
@@ -18,10 +18,6 @@ export class EffectsManager {
         this.currentPass = new OutlinePass(new THREE.Vector2(1, 1), scene, camera, this.models)
         this.composer = new EffectComposer(renderer)
         this.composer.addPass(new RenderPass(scene, camera))
-    }
-
-    public SetModels (models : Object3D[]) : void {
-        this.models = models
     }
 
     public UpdatePass (width : number, height : number, composer : EffectComposer) : void {

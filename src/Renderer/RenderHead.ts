@@ -3,6 +3,9 @@ import * as THREE from 'three'
 export class RenderHead {
     public scene : THREE.Scene;
     public renderer : THREE.WebGLRenderer;
+    private movementDirectionX : number;
+    private movementDirectionY : number;
+    private MAX_SPEED : number;
 
     public constructor () {
         this.scene = new THREE.Scene()
@@ -15,7 +18,9 @@ export class RenderHead {
         this.renderer.toneMapping = THREE.ReinhardToneMapping
         this.renderer.toneMappingExposure = 3
         this.renderer.shadowMap.enabled = true
-        console.log(this.scene)
+        this.movementDirectionX = 0
+        this.movementDirectionY = 0
+        this.MAX_SPEED = 100
     }
 
     public AddMeshToScene (mesh : THREE.Mesh): void {
@@ -23,13 +28,16 @@ export class RenderHead {
     }
 
     public onMouseMove (event : MouseEvent) : void {
-        const moveX = event.movementX
-        const moveY = event.movementY
+        this.AddMovement(-event.movementX, event.movementY)
+    }
 
-        if (this.scene != null) {
-            console.log(moveX, moveY)
-            this.scene.position.x -= moveX / 1000
-            this.scene.position.y += moveY / 1000
+    private AddMovement (directionX : number, dirextionY : number) : void {
+        if (Math.abs(this.movementDirectionX) < this.MAX_SPEED) {
+            this.movementDirectionX += directionX
+        }
+
+        if (Math.abs(this.movementDirectionY) < this.MAX_SPEED) {
+            this.movementDirectionY += dirextionY
         }
     }
 
@@ -61,6 +69,14 @@ export class RenderHead {
 
     public UpdateWindowSize () : void {
         this.renderer.setSize(window.innerWidth, window.innerHeight)
+    }
+
+    public MoveScene () : void {
+        this.movementDirectionX -= Math.sign(this.movementDirectionX)
+        this.movementDirectionY -= Math.sign(this.movementDirectionY)
+        const tmp = new THREE.Vector3(this.movementDirectionX, this.movementDirectionY, 0)
+        tmp.multiplyScalar(1 / 100000)
+        this.scene.position.add(tmp)
     }
 
     getDomElement (): HTMLCanvasElement {

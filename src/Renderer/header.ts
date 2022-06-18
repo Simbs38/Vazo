@@ -1,21 +1,19 @@
 import { RenderHead } from './RenderHead'
 import * as THREE from 'three'
 import { Obj2Mesh } from './Obj2Mesh'
-import { EffectsManager } from './EffectsManager'
-import { TextManager } from './TextManager'
-import { CameraManager } from './CameraManager'
+import { EffectsManager } from './Managers/EffectsManager'
+import { TextManager } from './Managers/TextManager'
+import { CameraManager } from './Managers/CameraManager'
 
 const cameraManager = new CameraManager()
 const head = new RenderHead()
-
-const outlineObjects = new Array<THREE.Object3D>()
 
 const effectManager = new EffectsManager(head.scene, head.renderer, cameraManager.Camera)
 const textManager = new TextManager()
 
 textManager.LoadText('Deram te o vaso?', new THREE.Vector3(-1.9, 0.5, -4)).then(mesh => {
     head.scene.add(mesh)
-    outlineObjects.push(mesh)
+    effectManager.models.push(mesh)
 })
 
 head.AddLigth(0xffa95c, 0x111024, 0xe6f7ec)
@@ -32,10 +30,9 @@ export function startHeader ():void {
         Obj2Mesh.ChangeToToon(args.children[0] as THREE.Mesh, 0xffffff)
         Obj2Mesh.ChangeColor(args.children[1] as THREE.Mesh, 0x17DE63)
 
-        outlineObjects.push(args.children[0])
-        outlineObjects.push(args.children[1])
+        effectManager.models.push(args.children[0])
+        effectManager.models.push(args.children[1])
 
-        effectManager.SetModels(outlineObjects)
         effectManager.UpdateWindowSize()
 
         head.scene.add(args)
@@ -49,11 +46,10 @@ window.addEventListener('resize', head.UpdateWindowSize, false)
 window.addEventListener('resize', effectManager.UpdateWindowSize, false)
 window.addEventListener('resize', render, false)
 
-window.addEventListener('mousemove', (event) => {
-    head.onMouseMove(event)
-})
+window.addEventListener('mousemove', (event) => { head.onMouseMove(event) })
 
 function render () {
+    head.MoveScene()
     requestAnimationFrame(render)
     effectManager.composer.render()
 }

@@ -3,6 +3,11 @@ import * as THREE from 'three'
 import { OutlinePass } from 'three/examples/jsm/postprocessing/OutlinePass'
 import { EffectComposer } from 'three/examples/jsm/postprocessing/EffectComposer'
 import { RenderPass } from 'three/examples/jsm/postprocessing/RenderPass'
+import { GlitchPass } from 'three/examples/jsm/postprocessing/GlitchPass.js'
+
+import { FilmPass } from 'three/examples/jsm/postprocessing/FilmPass.js'
+
+import { UnrealBloomPass } from 'three/examples/jsm/postprocessing/UnrealBloomPass'
 
 export class EffectsManager {
     private scene : THREE.Scene

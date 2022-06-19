@@ -47,6 +47,7 @@ window.addEventListener('resize', effectManager.UpdateWindowSize, false)
 window.addEventListener('resize', render, false)
 
 window.addEventListener('mousemove', (event) => { head.onMouseMove(event) })
+window.addEventListener('wheel', (event) => { head.OnMouseWheel(event) }, false)
 
 function render () {
     head.MoveScene()

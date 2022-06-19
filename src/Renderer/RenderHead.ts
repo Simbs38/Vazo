@@ -6,14 +6,19 @@ export class RenderHead {
     private movementDirectionX : number;
     private movementDirectionY : number;
     private MAX_SPEED : number;
+    private linePosition : number;
 
     public constructor () {
-        this.scene = new THREE.Scene()
+        const scene = new THREE.Scene()
+        const loader = new THREE.TextureLoader()
+        loader.load('https://raw.githubusercontent.com/Simbs38/Vazo/master/public/static/gradient.png',
+            function (texture) { scene.background = texture })
         this.renderer = new THREE.WebGLRenderer({ antialias: true })
         this.renderer.setSize(window.innerWidth, window.innerHeight)
         const color = 0xFFFFFF
         const near = 600
         const far = 1000
+        this.scene = scene
         this.scene.fog = new THREE.Fog(color, near, far)
         this.renderer.toneMapping = THREE.ReinhardToneMapping
         this.renderer.toneMappingExposure = 3
@@ -21,6 +26,7 @@ export class RenderHead {
         this.movementDirectionX = 0
         this.movementDirectionY = 0
         this.MAX_SPEED = 100
+        this.linePosition = 0
     }
 
     public AddMeshToScene (mesh : THREE.Mesh): void {
@@ -29,6 +35,10 @@ export class RenderHead {
 
     public onMouseMove (event : MouseEvent) : void {
         this.AddMovement(-event.movementX, event.movementY)
+    }
+
+    public OnMouseWheel (event : WheelEvent) : void {
+        this.linePosition += Math.sign(event.deltaY)
     }
 
     private AddMovement (directionX : number, dirextionY : number) : void {

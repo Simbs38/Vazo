@@ -7,6 +7,7 @@ export class RenderHead {
     private movementDirectionY : number;
     private MAX_SPEED : number;
     private linePosition : number;
+    private moveMesh : THREE.Group
 
     public constructor () {
         const scene = new THREE.Scene()
@@ -27,9 +28,14 @@ export class RenderHead {
         this.movementDirectionY = 0
         this.MAX_SPEED = 100
         this.linePosition = 0
+        this.moveMesh = new THREE.Group()
     }
 
-    public AddMeshToScene (mesh : THREE.Mesh): void {
+    public AddMeshToScene (mesh : THREE.Group, isMoveMesh : boolean): void {
+        if (isMoveMesh) {
+            this.moveMesh = mesh
+        }
+
         this.scene.add(mesh)
     }
 
@@ -86,7 +92,7 @@ export class RenderHead {
         this.movementDirectionY -= Math.sign(this.movementDirectionY)
         const tmp = new THREE.Vector3(this.movementDirectionX, this.movementDirectionY, 0)
         tmp.multiplyScalar(1 / 100000)
-        this.scene.position.add(tmp)
+        this.moveMesh.position.add(tmp)
     }
 
     getDomElement (): HTMLCanvasElement {

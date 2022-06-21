@@ -4,7 +4,7 @@
 
 <script lang="ts">
 import { defineComponent } from 'vue'
-import { startHeader } from '../Renderer/tmp'
+import { startHeader } from '../Renderer/header'
 
 export default defineComponent({
     name: 'Home',
